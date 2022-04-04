@@ -98,7 +98,7 @@
   <div>
     <label class="slider">
       <span class="left-label">Shorter</span>
-      <input type="range" min="0" max="2" step="0.01" bind:value={shape} />
+      <input type="range" min="0" max="2" step="0.1" bind:value={shape} />
       <span class="right-label">Longer</span>
     </label>
   </div>
