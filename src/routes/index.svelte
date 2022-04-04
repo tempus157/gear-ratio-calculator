@@ -103,7 +103,7 @@
     </label>
   </div>
 
-  <div>
+  <div class="etc">
     <select bind:value={count}>
       {#each gearSpeeds as gear}
         <option value={gear}>{gear} Speed</option>
@@ -112,12 +112,9 @@
     <button on:click={displayCalculated}>Calculate</button>
   </div>
 
-  <div>
+  <div class="result">
     {#each result as value, index}
-      <div>
-        <span>{index + 1}:</span>
-        <span>{value}</span>
-      </div>
+      <div>{index + 1}: {value}</div>
     {/each}
   </div>
 </div>
@@ -143,5 +140,19 @@
   .right-label {
     margin-left: 2%;
     text-align: left;
+  }
+
+  .etc {
+    display: flex;
+    justify-content: space-around;
+
+    * {
+      width: 100%;
+      margin: 2%;
+    }
+  }
+
+  .result {
+    margin: 0 2% 0 2%;
   }
 </style>
