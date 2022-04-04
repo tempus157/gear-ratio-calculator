@@ -11,12 +11,8 @@
   let result: string[] = [];
 
   $: actualShape = shape * count;
-  $: first, last, validateLast();
-
-  function validateLast() {
-    if (first < last) {
-      last = first;
-    }
+  $: if (first < last) {
+    last = first;
   }
 
   function displayCalculated() {
