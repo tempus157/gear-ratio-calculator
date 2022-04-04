@@ -119,17 +119,17 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .slider {
     display: flex;
+  }
 
-    input {
-      width: 100%;
-    }
+  .slider input {
+    width: 100%;
+  }
 
-    span {
-      width: 25%;
-    }
+  .slider span {
+    width: 25%;
   }
 
   .left-label {
@@ -145,11 +145,11 @@
   .etc {
     display: flex;
     justify-content: space-around;
+  }
 
-    * {
-      width: 100%;
-      margin: 2%;
-    }
+  .etc * {
+    width: 100%;
+    margin: 2%;
   }
 
   .result {
