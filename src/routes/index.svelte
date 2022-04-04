@@ -5,7 +5,7 @@
   let last = 1;
   let shape = 1;
   let count = 6;
-  let result = "I'm ready to calculate!";
+  let result: string[] = [];
 
   $: actualShape = shape * count;
 
@@ -15,11 +15,7 @@
       alert("Shape is wrong");
       return;
     }
-
-    result = "";
-    for (let ratio of calculate(magicValue)) {
-      result += `${ratio.toFixed(2)}<br />`;
-    }
+    result = calculate(magicValue).map((value) => round(value).toFixed(2));
   }
 
   function findMagicValue() {
@@ -40,7 +36,6 @@
         return result;
       }
     }
-
     return null;
   }
 
@@ -77,13 +72,21 @@
     <span>{shape.toFixed(2)}</span>
   </div>
 
-  <select bind:value={count}>
-    {#each gears as gear}
-      <option value={gear}>{gear} Speed</option>
-    {/each}
-  </select>
-  <button on:click={displayCalculated}>Calculate</button>
+  <div>
+    <select bind:value={count}>
+      {#each gears as gear}
+        <option value={gear}>{gear} Speed</option>
+      {/each}
+    </select>
+    <button on:click={displayCalculated}>Calculate</button>
+  </div>
 
-  <h3>Result</h3>
-  <div>{@html result}</div>
+  <div>
+    {#each result as value, index}
+      <div>
+        <span>{index + 1}:</span>
+        <span>{value}</span>
+      </div>
+    {/each}
+  </div>
 </div>
