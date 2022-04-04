@@ -2,6 +2,7 @@
   const gearSpeeds = [3, 4, 5, 6, 7, 8, 9, 10] as const;
   const minGearRatio = 0.48;
   const maxGearRatio = 6;
+  const interval = 0.01;
 
   let first = 3;
   let last = 1;
@@ -69,7 +70,13 @@
   <div>
     <label>
       <span>First</span>
-      <input type="range" min="0.48" max="6" step="0.01" bind:value={first} />
+      <input
+        type="range"
+        min={minGearRatio}
+        max={maxGearRatio}
+        step={interval}
+        bind:value={first}
+      />
       <span>{first.toFixed(2)}</span>
     </label>
   </div>
@@ -77,7 +84,13 @@
   <div>
     <label>
       <span>Last</span>
-      <input type="range" min="0.48" max="6" step="0.01" bind:value={last} />
+      <input
+        type="range"
+        min={minGearRatio}
+        max={maxGearRatio}
+        step={interval}
+        bind:value={last}
+      />
       <span>{last.toFixed(2)}</span>
     </label>
   </div>
@@ -85,7 +98,7 @@
   <div>
     <label>
       <span>Shorter</span>
-      <input type="range" min="0" max="2" step="0.01" bind:value={shape} />
+      <input type="range" min="0" max="2" step="0.1" bind:value={shape} />
       <span>Longer</span>
     </label>
   </div>
