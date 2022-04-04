@@ -66,6 +66,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Gear Ratio Calculator</title>
+</svelte:head>
+
 <div>
   <div>
     <label class="slider">
