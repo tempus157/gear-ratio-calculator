@@ -1,5 +1,7 @@
 <script lang="ts">
-  const gears = [3, 4, 5, 6, 7, 8, 9, 10] as const;
+  const gearSpeeds = [3, 4, 5, 6, 7, 8, 9, 10] as const;
+  const minGearRatio = 0.48;
+  const maxGearRatio = 6;
 
   let first = 3;
   let last = 1;
@@ -8,6 +10,13 @@
   let result: string[] = [];
 
   $: actualShape = shape * count;
+  $: first, last, validateLast();
+
+  function validateLast() {
+    if (first < last) {
+      last = first;
+    }
+  }
 
   function displayCalculated() {
     const magicValue = findMagicValue();
@@ -58,23 +67,32 @@
 
 <div>
   <div>
-    <input type="range" min="0.48" max="6" step="0.01" bind:value={first} />
-    <span>{first.toFixed(2)}</span>
+    <label>
+      <span>First</span>
+      <input type="range" min="0.48" max="6" step="0.01" bind:value={first} />
+      <span>{first.toFixed(2)}</span>
+    </label>
   </div>
 
   <div>
-    <input type="range" min="0.48" max="6" step="0.01" bind:value={last} />
-    <span>{last.toFixed(2)}</span>
+    <label>
+      <span>Last</span>
+      <input type="range" min="0.48" max="6" step="0.01" bind:value={last} />
+      <span>{last.toFixed(2)}</span>
+    </label>
   </div>
 
   <div>
-    <input type="range" min="0" max="5" step="0.01" bind:value={shape} />
-    <span>{shape.toFixed(2)}</span>
+    <label>
+      <span>Shorter</span>
+      <input type="range" min="0" max="2" step="0.01" bind:value={shape} />
+      <span>Longer</span>
+    </label>
   </div>
 
   <div>
     <select bind:value={count}>
-      {#each gears as gear}
+      {#each gearSpeeds as gear}
         <option value={gear}>{gear} Speed</option>
       {/each}
     </select>
