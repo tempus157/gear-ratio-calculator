@@ -68,8 +68,8 @@
 
 <div>
   <div>
-    <label>
-      <span>First</span>
+    <label class="slider">
+      <span class="left-label">First</span>
       <input
         type="range"
         min={minGearRatio}
@@ -77,13 +77,13 @@
         step={interval}
         bind:value={first}
       />
-      <span>{first.toFixed(2)}</span>
+      <span class="right-label">{first.toFixed(2)}</span>
     </label>
   </div>
 
   <div>
-    <label>
-      <span>Last</span>
+    <label class="slider">
+      <span class="left-label">Last</span>
       <input
         type="range"
         min={minGearRatio}
@@ -91,15 +91,15 @@
         step={interval}
         bind:value={last}
       />
-      <span>{last.toFixed(2)}</span>
+      <span class="right-label">{last.toFixed(2)}</span>
     </label>
   </div>
 
   <div>
-    <label>
-      <span>Shorter</span>
-      <input type="range" min="0" max="2" step="0.1" bind:value={shape} />
-      <span>Longer</span>
+    <label class="slider">
+      <span class="left-label">Shorter</span>
+      <input type="range" min="0" max="2" step="0.01" bind:value={shape} />
+      <span class="right-label">Longer</span>
     </label>
   </div>
 
@@ -122,4 +122,26 @@
   </div>
 </div>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .slider {
+    display: flex;
+
+    input {
+      width: 100%;
+    }
+
+    span {
+      width: 25%;
+    }
+  }
+
+  .left-label {
+    margin-right: 2%;
+    text-align: right;
+  }
+
+  .right-label {
+    margin-left: 2%;
+    text-align: left;
+  }
+</style>
