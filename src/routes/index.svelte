@@ -3,78 +3,57 @@
 
   let first = 3;
   let last = 1;
-  let decrease = 1;
+  let shape = 1;
   let count = 6;
   let result = "I'm ready to calculate!";
 
-  function display() {
-    const actualDecrease = decrease * count;
-    const shrink = findShrink(count, first, last, actualDecrease);
+  $: actualShape = shape * count;
 
-    if (shrink == undefined) {
-      alert("Decrease is wrong");
+  function displayCalculated() {
+    const magicValue = findMagicValue();
+    if (magicValue === null) {
+      alert("Shape is wrong");
       return;
     }
 
     result = "";
-    for (let gear of calculate(count, first, actualDecrease, shrink)) {
-      result += `${gear}<br />`;
+    for (let ratio of calculate(magicValue)) {
+      result += `${ratio.toFixed(2)}<br />`;
     }
   }
 
-  function findShrink(
-    count: number,
-    first: number,
-    last: number,
-    decrease: number
-  ) {
+  function findMagicValue() {
     let min = 0;
     let max = 10;
-    let shrink;
+    let result: number;
 
     while (min < max) {
-      shrink = (min + max) / 2;
-      const value = getLastGear(count, first, decrease, shrink);
+      result = (min + max) / 2;
+      const calculated = calculate(result);
+      const calculatedLast = calculated[calculated.length - 1];
 
-      if (value > last) {
-        max = shrink;
-      } else if (value < last) {
-        min = shrink;
+      if (calculatedLast > last) {
+        max = result;
+      } else if (calculatedLast < last) {
+        min = result;
       } else {
-        return shrink;
+        return result;
       }
     }
 
-    return undefined;
+    return null;
   }
 
-  function getLastGear(
-    count: number,
-    first: number,
-    decrease: number,
-    shrink: number
-  ) {
-    let result;
-    for (let value of calculate(count, first, decrease, shrink)) {
-      result = value;
-    }
-    return round(result);
-  }
-
-  function* calculate(
-    count: number,
-    first: number,
-    decrease: number,
-    shrink: number
-  ) {
-    let result = first;
-    yield result;
+  function calculate(magicValue: number) {
+    let gearRatio = first;
+    const result = [round(gearRatio)];
 
     for (let i = 1; i < count; i++) {
       const x = i / (count - 1);
-      result -= result / (decrease * x + shrink);
-      yield result;
+      gearRatio -= gearRatio / (actualShape * x + magicValue);
+      result.push(round(gearRatio));
     }
+    return result;
   }
 
   function round(value: number) {
@@ -94,8 +73,8 @@
   </div>
 
   <div>
-    <input type="range" min="0" max="5" step="0.01" bind:value={decrease} />
-    <span>{decrease.toFixed(2)}</span>
+    <input type="range" min="0" max="5" step="0.01" bind:value={shape} />
+    <span>{shape.toFixed(2)}</span>
   </div>
 
   <select bind:value={count}>
@@ -103,9 +82,8 @@
       <option value={gear}>{gear} Speed</option>
     {/each}
   </select>
-  <button type="button" on:click={display}>Calculate</button>
+  <button on:click={displayCalculated}>Calculate</button>
 
   <h3>Result</h3>
-  <div>{first} {last} {decrease} {count}</div>
   <div>{@html result}</div>
 </div>
