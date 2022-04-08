@@ -97,9 +97,9 @@
 
   <div>
     <label class="slider">
-      <span class="left-label">Shorter</span>
+      <span class="left-label">Low-rev</span>
       <input type="range" min="0" max="2" step="0.1" bind:value={shape} />
-      <span class="right-label">Longer</span>
+      <span class="right-label">High-rev</span>
     </label>
   </div>
 
@@ -122,37 +122,39 @@
 <style>
   .slider {
     display: flex;
+    gap: 1rem;
   }
 
   .slider input {
-    width: 100%;
+    width: 45rem;
   }
 
   .slider span {
-    width: 25%;
+    width: 7.5rem;
+    font-size: 1.6rem;
   }
 
   .left-label {
-    margin-right: 2%;
     text-align: right;
   }
 
   .right-label {
-    margin-left: 2%;
     text-align: left;
   }
 
   .etc {
     display: flex;
-    justify-content: space-around;
+    margin-top: 1rem;
+    gap: 2rem;
   }
 
   .etc * {
-    width: 100%;
-    margin: 2%;
+    width: 30rem;
+    font-size: 1.6rem;
   }
 
   .result {
-    margin: 0 2% 0 2%;
+    margin-top: 2rem;
+    font-size: 1.6rem;
   }
 </style>
